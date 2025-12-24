@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+        
+</head>
+<body>
+    <nav>
+        <button class="logo">LOGOOOO</button>
+        <ul class="nav-links">
+            <li><a href="#">Items</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="sign-in-btn">Sign-in</button>
+            <span class="cart-icon">🛒</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Added wrapper to contain both login form and BMW image -->
+        <div class="content-wrapper">
+            
+            <div class="login-card">
+                <div class="tabs">
+                    <!-- Added id to tabs for JavaScript interaction -->
+                    <button class="tab active" id="signin-tab">Sign in</button>
+                    <button class="tab inactive" id="signup-tab">Sign up</button>
+                </div>
+
+                <form>
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <input type="email" placeholder="Enter your email">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <input type="password" id="password" placeholder="Enter your password">
+                            <span class="eye-icon" onclick="togglePassword()">👁</span>
+                        </div>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">Loggin</button>
+
+                    <div class="divider">OR</div>
+
+                    <button type="button" class="google-btn">Log in with Google</button>
+                </form>
+            </div>
+
+            <!-- Added BMW image container -->
+            <!--<div class="bmw-image-container">
+                <img src="public/images/bmw-image.webp" alt="BMW">
+            </div>-->
+        </div>
+    </div>
+
+    <!-- Removed inline script and added external script file -->
+    <script src="script.js"></script>
+</body>
+</html>

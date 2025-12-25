@@ -12,6 +12,7 @@ function togglePassword() {
 const signinTab = document.getElementById("signin-tab")
 const signupTab = document.getElementById("signup-tab")
 const loginCard = document.querySelector(".login-card")
+const bgVideo = document.querySelector(".bg-video")
 
 // Add click event listener to Sign up tab
 signupTab.addEventListener("click", () => {
@@ -23,6 +24,7 @@ signupTab.addEventListener("click", () => {
 
   // Add slide-right class to move the card to the right
   loginCard.classList.add("slide-right")
+  bgVideo.classList.add("bg-video-left")
 })
 
 // Add click event listener to Sign in tab
@@ -33,6 +35,9 @@ signinTab.addEventListener("click", () => {
   signinTab.classList.remove("inactive")
   signinTab.classList.add("active")
 
+
   // Remove slide-right class to move the card back to the left
   loginCard.classList.remove("slide-right")
+  bgVideo.classList.remove("bg-video-left")
+
 })

@@ -74,9 +74,12 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  padding: 40px;
+  height: 500px;
+  width:940px;
+  margin:50px auto;
   position: relative;
+  background: rgba(61, 60, 60, 0.278);
+  border-radius: 20px;
 }
 
 .content-wrapper {
@@ -84,14 +87,15 @@ nav {
   align-items: center;
   gap: 0;
   max-width: 900px;
-  max-height: 450px;
+  height: 470px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  
+  background: darkgray;
   background-image: url("public/bmw-image.webp");
   background-size: cover;
   background-position: center;
   border-radius: 30px;
-  padding: 40px;
+  padding: 25px;
   backdrop-filter: blur(20px);
 }
 
@@ -102,15 +106,20 @@ nav {
   padding: 40px;
   width: 100%;
   max-width: 400px;
-  height: 400px;
+  height: 420px;
   flex-shrink: 1;
-  transition: transform 0.5s ease-in-out;
+  /* Enhanced transition with modern cubic-bezier easing and perspective effect */
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
+  transform-origin: center;
+  perspective: 1000px;
 }
 
 /* Added class for sliding the card to the right */
 .login-card.slide-right {
-  transform: translateX(400px);
+  /* Smooth slide with subtle perspective and opacity fade */
+  transform: translateX(450px) rotateY(2deg);
+  opacity: 0.95;
 }
 
 /*.bmw-image-container {
@@ -228,7 +237,6 @@ input::placeholder {
   font-size: 12px;
   cursor: pointer;
 }
-
 
 /*FOOTER DEBUT*/
 footer {

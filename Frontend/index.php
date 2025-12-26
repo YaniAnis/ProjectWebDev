@@ -22,6 +22,7 @@ define('BASE_URL', 'http://localhost:3000/Frontend');
         <li><a href="#">Items</a></li>
         <li><a href="<?= BASE_URL ?>/index.php">Home</a></li>
         <li><a href="<?= BASE_URL ?>/about.php">About</a></li>
+        <li><a href="<?= BASE_URL ?>/contact.php">Contact</a></li>
     </ul>
 
     <div class="nav-right">

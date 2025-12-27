@@ -68,6 +68,13 @@ CREATE TABLE cart_items (
 
   CONSTRAINT uq_cart_item UNIQUE (cart_id, item_id)
 );
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- =========================================================
 -- Fin du schéma

@@ -1,50 +1,42 @@
 // FAQ Accordion Functionality
-const faqItems = document.querySelectorAll(".faq-item")
+const faqItems = document.querySelectorAll(".faq-item");
 
 faqItems.forEach((item) => {
-  const question = item.querySelector(".faq-question")
+  const question = item.querySelector(".faq-question");
 
   question.addEventListener("click", () => {
     // Close all other items
     faqItems.forEach((otherItem) => {
       if (otherItem !== item) {
-        otherItem.classList.remove("active")
+        otherItem.classList.remove("active");
       }
-    })
+    });
 
     // Toggle current item
-    item.classList.toggle("active")
-  })
-})
+    item.classList.toggle("active");
+  });
+});
 
-// Form Submission
-const contactForm = document.querySelector(".contact-form")
+// Form Submission (CORRIGÉ)
+// ❌ On NE BLOQUE PLUS le submit
+// ✅ PHP gère l’envoi et l’insertion DB
+const contactForm = document.querySelector(".contact-form");
 
 if (contactForm) {
-  contactForm.addEventListener("submit", (e) => {
-    e.preventDefault()
-
-    // Get form values
-    const formData = new FormData(contactForm)
-
-    // Here you would typically send the form data to a server
-    console.log("Form submitted with data:", Object.fromEntries(formData))
-
-    // Show success message
-    alert("Merci! Votre message a été envoyé avec succès. Nous vous répondrons dès que possible.")
-
-    // Reset form
-    contactForm.reset()
-  })
+  contactForm.addEventListener("submit", () => {
+    // PAS de e.preventDefault()
+    // Juste pour debug / info
+    console.log("Formulaire envoyé vers le backend PHP");
+  });
 }
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
-    e.preventDefault()
-    const target = document.querySelector(this.getAttribute("href"))
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" })
+      target.scrollIntoView({ behavior: "smooth" });
     }
-  })
-})
+  });
+});

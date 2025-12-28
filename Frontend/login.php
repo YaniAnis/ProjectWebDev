@@ -1,5 +1,5 @@
 <?php
-define('BASE_URL', 'http://localhost:3000/Frontend');
+define('BASE_URL', 'http://localhost/ProjectWebDev/Frontend/');
 ?>
 <!DOCTYPE html>
 <html lang="fr">

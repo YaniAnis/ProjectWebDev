@@ -1,5 +1,41 @@
 <?php
-define('BASE_URL', 'http://localhost:3000/Frontend');
+require_once "config.php";
+
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+$success = "";
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $name = trim($_POST["name"] ?? "");
+    $email = trim($_POST["email"] ?? "");
+    $subject = trim($_POST["subject"] ?? "");
+    $message = trim($_POST["message"] ?? "");
+
+    if (empty($name) || empty($email) || empty($message)) {
+        $error = "Veuillez remplir tous les champs obligatoires.";
+    } else {
+        $stmt = $conn->prepare(
+            "INSERT INTO messages (name, email, message) VALUES (?, ?, ?)"
+        );
+
+        $stmt->bind_param("sss", $name, $email, $message);
+
+        if ($stmt->execute()) {
+            $success = "Message envoyé avec succès !";
+        } else {
+            $error = "Erreur lors de l’envoi du message.";
+        }
+
+        $stmt->close();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,7 +58,6 @@ define('BASE_URL', 'http://localhost:3000/Frontend');
         <li><a href="<?= BASE_URL ?>/index.php">Home</a></li>
         <li><a href="<?= BASE_URL ?>/about.php">About</a></li>
         <li><a href="<?= BASE_URL ?>/contact.php">Contact</a></li>
-
     </ul>
 
     <div class="nav-right">
@@ -57,7 +92,7 @@ define('BASE_URL', 'http://localhost:3000/Frontend');
                 <div class="info-card">
                     <div class="info-icon">📍</div>
                     <h3>Zone de livraison</h3>
-                    <p>56 wilayas</p>
+                    <p>69 wilayas</p>
                 </div>
 
                 <div class="info-card">
@@ -83,21 +118,34 @@ define('BASE_URL', 'http://localhost:3000/Frontend');
             <div class="contact-form-wrapper">
                 <h2>Envoyez-nous un Message</h2>
 
-                <form class="contact-form">
+                <!-- Messages -->
+                <?php if ($success): ?>
+                    <p style="color: green; margin-bottom: 15px;">
+                        <?= $success ?>
+                    </p>
+                <?php endif; ?>
+
+                <?php if ($error): ?>
+                    <p style="color: red; margin-bottom: 15px;">
+                        <?= $error ?>
+                    </p>
+                <?php endif; ?>
+
+                <form class="contact-form" method="POST" action="<?= BASE_URL ?>/contact.php">
                     <div class="form-group">
-                        <input type="text" placeholder="Votre Nom" required>
+                        <input type="text" name="name" placeholder="Votre Nom" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="email" placeholder="Votre Email" required>
+                        <input type="email" name="email" placeholder="Votre Email" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" placeholder="Sujet">
+                        <input type="text" name="subject" placeholder="Sujet">
                     </div>
 
                     <div class="form-group">
-                        <textarea placeholder="Votre Message" rows="6" required></textarea>
+                        <textarea name="message" placeholder="Votre Message" rows="6" required></textarea>
                     </div>
 
                     <button type="submit" class="submit-btn">
@@ -140,53 +188,6 @@ define('BASE_URL', 'http://localhost:3000/Frontend');
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="faq-section">
-        <h2>Questions Fréquentes</h2>
-
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Quel est votre délai de livraison ?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>2 à 5 jours ouvrables selon votre localisation.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Acceptez-vous les retours ?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Retours acceptés sous 30 jours.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Comment vérifier la compatibilité ?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Via notre outil ou avec l’aide du support.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Y a-t-il une garantie ?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Garantie standard de 2 ans.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
 </main>
 
 <footer>
@@ -212,7 +213,6 @@ define('BASE_URL', 'http://localhost:3000/Frontend');
     </div>
 </footer>
 
-<!-- JS -->
 <script src="<?= BASE_URL ?>/assets/js/contact.js"></script>
 
 </body>
